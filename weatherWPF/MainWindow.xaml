@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:weatherWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="weatherData">
+            <Setter Property="FontSize" Value="25"></Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <TextBox x:Name="cityTxtBox" materialDesign:HintAssist.Hint="Введите город на латинице" FontSize="25" Background="Silver" Height="50"/>
+        <Button Content="Get Weather" FontSize="25" Height="50" Width="200" Margin="0 10" Click="GetWeather"/>
 
-    </Grid>
+        <StackPanel x:Name="weatherPanel" Visibility="Hidden" Height="300">
+            <TextBlock Style="weatherData">Temp: 
+                <TextBlock Text="{Binding Path=main.temp}"/>°C
+            </TextBlock>
+            <TextBlock>Temp feels like: 
+                <TextBlock Text="{Binding Path=main.feels_like}"/>°C
+            </TextBlock>
+            <TextBlock>Temp Max: 
+                <TextBlock Text="{Binding Path=main.temp_max}"/>°C
+            </TextBlock>
+            <TextBlock>Temp Min: 
+                <TextBlock Text="{Binding Path=main.temp_min}"/>°C
+            </TextBlock>
+        </StackPanel>
+    </StackPanel>
 </Window>

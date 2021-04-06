@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WeatherService;
+﻿using System.Windows;
+using WeatherService_Serv;
 
 namespace weatherWPF
 {
     public partial class MainWindow : Window
     {
+        private GetWeatherService _weatherService;
         public MainWindow()
         {
             InitializeComponent();
-            var weatherService = new GetWeatherService();
-            weatherService.GetWeather("almaty");
+            _weatherService = new GetWeatherService();
+        }
+
+        private void GetWeather(object sender, RoutedEventArgs e)
+        {
+            var weather = _weatherService.GetWeather(cityTxtBox.Text);
+            weather.main.ConventToCelsius();
+
+            this.DataContext = weather;
+            weatherPanel.Visibility = Visibility.Visible;
         }
     }
 }
