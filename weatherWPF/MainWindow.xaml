@@ -9,26 +9,59 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="weatherData">
-            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
         </Style>
     </Window.Resources>
     <StackPanel>
-        <TextBox x:Name="cityTxtBox" materialDesign:HintAssist.Hint="Введите город на латинице" FontSize="25" Background="Silver" Height="50"/>
+        <TextBox x:Name="cityTxtBox" materialDesign:HintAssist.Hint="Введите город на латинице" FontSize="25" Background="#ececec" Height="50"/>
         <Button Content="Get Weather" FontSize="25" Height="50" Width="200" Margin="0 10" Click="GetWeather"/>
 
-        <StackPanel x:Name="weatherPanel" Visibility="Hidden" Height="300">
-            <TextBlock Style="weatherData">Temp: 
-                <TextBlock Text="{Binding Path=main.temp}"/>°C
-            </TextBlock>
-            <TextBlock>Temp feels like: 
-                <TextBlock Text="{Binding Path=main.feels_like}"/>°C
-            </TextBlock>
-            <TextBlock>Temp Max: 
-                <TextBlock Text="{Binding Path=main.temp_max}"/>°C
-            </TextBlock>
-            <TextBlock>Temp Min: 
-                <TextBlock Text="{Binding Path=main.temp_min}"/>°C
-            </TextBlock>
+        <StackPanel x:Name="weatherPanel" Orientation="Horizontal" Visibility="Hidden" Height="300">
+            
+            <StackPanel Margin="15 0">
+                <ListBox ItemsSource="{Binding Path=weather}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource weatherData}">Weather: 
+                                    <TextBlock Text="{Binding Path=main}"/>
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource weatherData}">Description : 
+                                    <TextBlock Text="{Binding Path=description}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel Margin="15 0">
+                <TextBlock Style="{StaticResource weatherData}">Temp: 
+                    <TextBlock Text="{Binding Path=main.temp}"/>°C
+                </TextBlock>
+                <TextBlock Style="{StaticResource weatherData}">Feels like: 
+                    <TextBlock Text="{Binding Path=main.feels_like}"/>°C
+                </TextBlock>
+                <TextBlock Style="{StaticResource weatherData}">Max: 
+                    <TextBlock Text="{Binding Path=main.temp_max}"/>°C
+                </TextBlock>
+                <TextBlock Style="{StaticResource weatherData}">Min: 
+                    <TextBlock Text="{Binding Path=main.temp_min}"/>°C
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="15 0">
+                <TextBlock Style="{StaticResource weatherData}">Wind speed: 
+                    <TextBlock Text="{Binding Path=wind.speed}"/>m/s
+                </TextBlock>
+                <TextBlock Style="{StaticResource weatherData}">Wind deg: 
+                    <TextBlock Text="{Binding Path=wind.deg}"/> corner
+                </TextBlock>
+                <TextBlock Style="{StaticResource weatherData}">Wind gust: 
+                    <TextBlock Text="{Binding Path=wind.gust}"/>
+                </TextBlock>
+            </StackPanel>
+            
         </StackPanel>
     </StackPanel>
 </Window>

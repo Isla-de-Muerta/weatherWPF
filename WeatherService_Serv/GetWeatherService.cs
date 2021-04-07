@@ -24,5 +24,4 @@ namespace WeatherService_Serv
             return root.IsSuccessful ? root.Data : null;
         }
     }
-
 }
