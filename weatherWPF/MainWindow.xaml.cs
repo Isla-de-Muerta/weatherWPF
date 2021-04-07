@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WeatherService_Serv;
 
 namespace weatherWPF
@@ -15,10 +16,16 @@ namespace weatherWPF
         private void GetWeather(object sender, RoutedEventArgs e)
         {
             var weather = _weatherService.GetWeather(cityTxtBox.Text);
-            weather.main.ConventToCelsius();
-
-            this.DataContext = weather;
-            weatherPanel.Visibility = Visibility.Visible;
+            if (weather == null)
+            {
+                cityTxtBox.Text = "Такого города не существует";
+            }
+            else
+            {
+                weather.main.ConventToCelsius();
+                this.DataContext = weather;
+                weatherPanel.Visibility = Visibility.Visible;
+            }
         }
     }
 }

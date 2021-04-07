@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 
 namespace WeatherService_Serv
 {
-    public class GetWeatherService
+    public class GetWeatherService: IDisposable
     {
         private string apiConectionString = "https://api.openweathermap.org/data/2.5/weather";
         private string apiKey = "1dfe39974aeee20224a284064b77134f";
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
         public Root GetWeather(string city)
         {
