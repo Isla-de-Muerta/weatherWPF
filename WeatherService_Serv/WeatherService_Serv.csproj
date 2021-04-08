@@ -54,6 +54,7 @@
     <Compile Include="Root.cs" />
     <Compile Include="Sys.cs" />
     <Compile Include="Weather.cs" />
+    <Compile Include="weatherDataBase.cs" />
     <Compile Include="Wind.cs" />
   </ItemGroup>
   <ItemGroup>
